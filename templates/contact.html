@@ -1,0 +1,105 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Contact
+{% endblock %}
+
+{% block contact %}
+<!-- slider image -->
+<div class="container-lg banner">
+    <img id="photo" src="/static/banner2.jpg" class="rounded" style="width:100%; filter: brightness(70%); ">
+    <div class="centered">
+        <h3 style="font-size: 60px;">Contact Us</h3>
+        <P>We will get back to you shortly</P>
+    </div>
+</div>
+
+<section class="contact-section" style="margin-bottom:100px; margin-top:50px">
+	<div class="container">
+	    <iframe style="width:100%; height: 480px; position:relative;" src="https://maps.google.com/maps?q=horizon%202%20estate&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" allowfullscreen></iframe>
+	</div>
+
+	<div class="row">
+		<form action="" method="post" onsubmit="sendMail();" class="container needs-validated">
+			<div class="form-group row">
+				<div class="col-12" style="padding-top:50px; padding-bottom:20px">
+					<h2><b>Send us a message</b></h2>
+				</div>
+				<div class="col-lg-4">
+					<input type="text" class="form-control" id="name" placeholder="Enter your name" name="name" required>
+					<div class="valid-feedback">Valid.</div>
+					<div class="invalid-feedback">Please fill out this field.</div>
+				</div>
+				<div class="col-lg-4">
+					<input type="text" class="form-control" id="mail" placeholder="Enter email address" name="mail" required>
+					<div class="valid-feedback">Valid.</div>
+					<div class="invalid-feedback">Please fill out this field.</div>
+				</div>
+				<div class="col-lg-1 w3-right-align">
+					<i class="fa fa-home fa-2x"></i>
+				</div>
+				<div class="col-lg-3 contact">
+					<text>Horizon 2 Estate</text><br>
+					<text class="text-muted"> Lagos, Nigeria.</text>
+				</div>
+			</div>
+			<div class="form-group row">
+				<div class="col-lg-8">
+					<input type="text" class="form-control" id="subject" placeholder="Subject" name="subject" required>
+					<div class="valid-feedback">Valid.</div>
+					<div class="invalid-feedback">Please fill out this field.</div>
+				</div>
+				<div class="col-lg-1 w3-right-align">
+					<i class="fa fa-phone fa-2x"></i>
+				</div>
+				<div class="col-lg-3 contact">
+					<text>+234 813 123 0434</text><br>
+					<text class="text-muted">Mon to Fri 9am to 6pm</text>
+				</div>
+			</div>
+			<div class="form-group row">
+				<div class="col-lg-8">
+					<textarea style="height:200px; resize: none" class="form-control" id="message" placeholder="Message" name="message" required></textarea>
+					<div class="valid-feedback">Valid.</div>
+					<div class="invalid-feedback">Please fill out this field.</div>
+				</div>
+				<div class="col-lg-1 w3-right-align">
+					<i class="fa fa-envelope fa-2x"></i>
+				</div>
+				<div class="col-lg-3 contact">
+					<a href="mailto:jubileerols@gmail.com">jubileerols@gmail.com</a>
+				</div>
+			</div>
+			<button type="submit" class="boxed-btn4">Send<i class="w3-margin-left fa fa-send"></i></button>
+		</form>
+	</div>
+</section>
+{% endblock %}
+
+
+
+{% block script %}
+    <script>
+        function check(input) {
+            if (input.value != document.getElementById('password').value) {
+                input.setCustomValidity('Password must match.');
+            } else {
+                // input is valid -- reset the error message
+                input.setCustomValidity('');
+            }
+        }
+
+        function sendMail() {
+            var message = document.getElementById("message").value;
+            var subject = document.getElementById("subject").value;
+            var name = document.getElementById("name").value;
+            var mail = document.getElementById("mail").value;
+
+            var body = message + "\n\n" + "From:\n" + name + "\n" + mail;
+
+            document.location.href = "mailto:jubileerolsmail.com?subject="
+                + encodeURIComponent(subject)
+                + "&body=" + encodeURIComponent(body);
+        }
+    </script>
+{% endblock %}

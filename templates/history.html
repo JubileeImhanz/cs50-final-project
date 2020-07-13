@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+
+{% block title %}
+History
+{% endblock %}
+
+
+{% block main %}
+<table class="table table-striped" style="text-align:left; margin-bottom:100px;">
+    <thead id="stickyHeader">
+        <tr>
+            <th>Symbol</th>
+            <th>Currency</th>
+            <th>Type</th>
+            <th>Amount</th>
+            <th>Rate</th>
+            <th>Transacted</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        {% for row in rows %}
+            {% if row["type"] == "Buy" %}
+                <tr class="table-primary">
+                    <td>{{ row["symbol"] }}</td>
+                    <td>{{ row["currency"] }}</td>
+                    <td>{{ row["type"] }}</td>
+                    <td>{{ row["amount"] }}</td>
+                    <td>{{ row["rate"] }}</td>
+                    <td>{{ row["date"] }}</td>
+                </tr>
+            {% elif row["type"] == "Sell"  %}
+                <tr class="table-warning">
+                    <td>{{ row["symbol"] }}</td>
+                    <td>{{ row["currency"] }}</td>
+                    <td>{{ row["type"] }}</td>
+                    <td>{{ row["amount"] }}</td>
+                    <td>{{ row["rate"] }}</td>
+                    <td>{{ row["date"] }}</td>
+                </tr>
+            {% else %}
+                <tr class="table-success">
+                    <td>{{ row["symbol"] }}</td>
+                    <td>{{ row["currency"] }}</td>
+                    <td>{{ row["type"] }}</td>
+                    <td>{{ row["amount"] }}</td>
+                    <td>{{ row["rate"] }}</td>
+                    <td>{{ row["date"] }}</td>
+            {% endif %}
+        {% endfor %}
+
+    </tbody>
+</table>
+{% endblock %}

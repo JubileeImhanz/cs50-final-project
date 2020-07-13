@@ -1,0 +1,115 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Portfolio
+{% endblock %}
+
+
+{% block nav %}
+<li class="nav-item"><a class="nav-link" href="/changepassword">Password</a></li>
+{% endblock %}
+
+{% block main %}
+<table class="table table-striped" style="text-align:left">
+    <thead>
+        <tr>
+            <th>Symbol</th>
+            <th>Currency</th>
+            <th>Amount</th>
+            <th>Rate</th>
+            <th>TOTAL</th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <td colspan="4"></td>
+            <td><b>{{ total }}</b></td>
+        </tr>
+    </tfoot>
+    <tbody>
+
+        {% for row in rows %}
+            <tr>
+                <td>{{ row["symbol"] }}</td>
+                <td>{{ row["currency"] }}</td>
+                <td>{{ row["amount"] }}</td>
+                <td>{{ row["rate"] }}</td>
+                <td>{{ row["dollar_price"] }}</td>
+            </tr>
+        {% endfor %}
+
+        <tr>
+            <td colspan="4">CASH</td>
+            <td>{{ cash }}</td>
+        </tr>
+
+    </tbody>
+</table>
+
+
+<form action="" method="post" class="needs-validation" style="padding-top:70px" novalidate>
+    <div class="form-group form-inline">
+        <select class="form-control mr-sm-2" style="width:20%" name="symbol" required>
+            <option disabled="" selected="" value="">Currency</option>
+                {% for symbol in symbols %}
+                    <option value= {{ symbol["symbol"] }}>{{ symbol["symbol"] }}</option>
+                {% endfor %}
+        </select>
+
+        <input autocomplete="off" class="form-control mr-sm-2" min="1" step="0.01" name="amount" placeholder="Amount USD" type="number" required>
+
+
+        <button class="mr-sm-2 btn btn-primary form-control" style="width:10%" type="submit" onclick="document.forms[0].action='/buy';">Buy more</button>
+        <div class="invalid-feedback" style="text-align:left">Please select a valid currency and amount.</div>
+    </div>
+</form>
+
+<form action="" method="post" class="needs-validation" style="margin-bottom:100px" novalidate>
+    <div class="form-group form-inline">
+        <select class="form-control mr-sm-2" style="width:20%" name="symbol" id="sellSymbol" onchange="selectFunction()" required>
+            <option disabled="" selected="" value="">Currency</option>
+                {% for symbol in symbols %}
+                    <option value= {{ symbol["symbol"] }}>{{ symbol["symbol"] }}</option>
+                {% endfor %}
+        </select>
+
+        <input autocomplete="off" class="form-control mr-sm-2" min="1" step="0.01" name="amount" id="sellAmount" placeholder="Amount" type="number" required>
+
+
+        <button class="mr-sm-2 btn btn-warning form-control" style="width:10%" type="submit" onclick="document.forms[1].action='/sell';">Sell</button>
+        <div class="invalid-feedback" style="text-align:left">Please select a valid currency and amount.</div>
+    </div>
+</form>
+
+{% endblock %}
+
+
+{% block script %}
+<script>
+
+    function selectFunction() {
+      var x = document.getElementById("sellSymbol").value;
+      document.getElementById("sellAmount").placeholder = "Amount " + x;
+    }
+
+    // Disable form submissions if there are invalid fields
+    (function() {
+      'use strict';
+      window.addEventListener('load', function() {
+        // Get the forms we want to add validation styles to
+        var forms = document.getElementsByClassName('needs-validation');
+        // Loop over them and prevent submission
+        var validation = Array.prototype.filter.call(forms, function(form) {
+          form.addEventListener('submit', function(event) {
+            if (form.checkValidity() === false) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+          }, false);
+        });
+      }, false);
+    })();
+
+</script>
+{% endblock %}

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- documentation at http://getbootstrap.com/docs/4.1/, alternative themes at https://bootswatch.com/ -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+        <!-- https://favicon.io/emoji-favicons/money-mouth-face/ -->
+        <link href="/static/money.png" rel="icon">
+
+        <link href="/static/styles.css" rel="stylesheet">
+
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+        <title>FTrader: Home</title>
+
+    </head>
+
+    <body>
+        <div id="page-container">
+            <div id="content-wrap">
+                <div class="header-area">
+                    <div class="main-header-area">
+                        <nav class="navbar navbar-expand-md navbar-light bg-light border">
+                            <div class="logo">
+                                <a class="navbar-brand" href="/"><span><img src="/static/logo.png" alt="logo" style="max-width: 40%; height: auto;"></span><span class="green">F</span><span class="red">Trader</span></a>
+                            </div>
+                            <div class="main-menu collapse navbar-collapse" id="navbar">
+                                <ul class="navbar-nav ml-auto mt-2">
+                                    <li class="nav-item"><a class="nav-link" href="/contact">Contact Us</a></li>
+                                    <li class="nav-item"><a data-toggle="modal" data-target="#register" href="#">Register</a></li>
+                                    <li class="nav-item"><a data-toggle="modal" data-target="#login" href="#">Login</a></a></li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <header>
+                                <div class="alert border text-center {{ category }}" role="alert">
+                                    {{ message }}
+                                </div>
+                            </header>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+
+                <!-- slider image -->
+                <div class="container-lg banner" style="margin-bottom:100px;">
+                    <div class="mySlides">
+                        <img id="photo" src="/static/banner1.jpg" class="rounded" style="width:100%; filter: brightness(40%); ">
+                        <div class="centered">
+                            <h3><span><img src="/static/logo2.png" alt="logo" style="max-width: 70%; height: auto;"></span><span style="color:green">F</span><span style="color:red">Trader</span></h3>
+                            <p>Live forex trading platform</p>
+                        </div>
+                    </div>
+                    <div class="mySlides">
+                        <img id="photo" src="/static/banner2.jpg" class="rounded" style="width:100%; filter: brightness(70%); ">
+                        <div class="centered">
+                            <h3 style="font-size: 60px;">Start Trading Today</h3>
+                            <p>Trade with ease and comfort</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <footer class=" footer w3-container w3-center">
+                <div class="footer_text">
+                    <h5 style="color: #b2b2b2; margin-top: 20px;">Find Us On</h5>
+                    <div class="w3-xlarge"  style="padding-bottom:10px; color: #b2b2b2;">
+                        <a href="#" class="w3-margin-right " style="color: #b2b2b2;">
+                            <i class="fa fa-facebook-official fa-flag"></i>
+                        </a>
+                        <a href="#" class="w3-margin-right"  style="color: #b2b2b2;">
+                            <i class="fa fa-instagram fa-flag"></i>
+                        </a>
+                        <a href="#" class="w3-margin-right"  style="color: #b2b2b2;">
+                            <i class="fa fa-snapchat fa-flag"></i>
+                        </a>
+                        <a href="#" class="w3-margin-right"  style="color: #b2b2b2;">
+                            <i class="fa fa-pinterest-p fa-flag"></i>
+                        </a>
+                        <a href="#" class="w3-margin-right"  style="color: #b2b2b2;">
+                            <i class="fa fa-twitter fa-flag"></i>
+                        </a>
+                        <a href="#"  style="color: #b2b2b2;">
+                            <i class="fa fa-linkedin fa-flag"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="copy-right_text">
+                    <div class="container">
+                        <div class="footer_border"></div>
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <p class="copy_right text-center">
+                                    Designed by Jubilee Imhanzenobe<br>
+                                    Data provided for free by <a href="https://openrates.io/">OpenRates</a>. View <a href="https://iextrading.com/api-exhibit-a/">OpenRates API usage</a>.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+            <!-- Modal for login -->
+            <div class="modal fade" id="login">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">Login</h4>
+                            <button type="button" class="close" data-dismiss="modal">×</button>
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            <form id="login-form" action="/login" method="post">
+                                <div class="form-group">
+                                    <input autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" type="text" required>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" name="password" placeholder="Password" type="password" required>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" type="submit" form="login-form">Log In</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal for Register -->
+            <div class="modal fade" id="register">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">Register</h4>
+                            <button type="button" class="close" data-dismiss="modal">×</button>
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            <form id="register-form" action="/register" method="post" class="needs-validation">
+                                <div class="form-group">
+                                    <input autocomplete="off" autofocus="" class="form-control" name="username" placeholder="Username" type="text" required>
+                                    <div class="invalid-feedback">Please fill out this field.</div>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" id="password" name="password" placeholder="Password" type="password" required>
+                                    <div class="invalid-feedback">Please fill out this field.</div>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" name="confirmation" placeholder="Password (again)" type="password" oninput="check(this)" required>
+                                    <div class="invalid-feedback">Passwords do not match.</div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" type="submit" form="register-form">Register</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+
+    <script>
+        var myIndex = 0;
+        carousel();
+
+        function carousel() {
+            var i;
+            var x = document.getElementsByClassName("mySlides");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            myIndex++;
+            if (myIndex > x.length) {myIndex = 1}
+            x[myIndex-1].style.display = "block";
+            setTimeout(carousel, 4000); // Change image every 4 seconds
+        }
+
+        function check(input) {
+            if (input.value != document.getElementById('password').value) {
+                input.setCustomValidity('Password must match.');
+            } else {
+                // input is valid -- reset the error message
+                input.setCustomValidity('');
+            }
+        }
+    </script>
+
+</html>

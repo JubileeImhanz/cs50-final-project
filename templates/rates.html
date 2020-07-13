@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Rates
+{% endblock %}
+
+
+{% block main %}
+<form action="/rates" method="post">
+    <div class="form-group">
+        <select class="form-control mr-sm-2" style="width:20%" name="symbol" required>
+            <option disabled="" selected="" value="">Currency</option>
+                {% for currency in currencies %}
+                    <option value= {{ currency }}>{{ currency }}</option>
+                {% endfor %}
+        </select>
+    </div>
+    <button class="btn btn-primary" type="submit">Quote</button>
+</form>
+
+{% endblock %}
